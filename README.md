@@ -1,101 +1,88 @@
-# CropCare AI
+<!--
+  GitHub Profile README for huracan07
+  Accent color: #FACC15
+-->
 
-A specialized crop-health monitoring system, not a general chatbot: turns a
-leaf photo into a disease name, a severity percentage, a field-level risk
-call, and a recommendation — and remembers every scan so it can show trends
-over time.
+<div align="center">
 
-## Quick start
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FACC15,100:FEF08A&height=190&section=header&text=huracan07&fontSize=52&fontColor=1F2937&fontAlignY=38&animation=twinkling" alt="Waving header banner" width="100%" />
 
-```bash
-pip install -r requirements.txt
-python database.py        # creates cropcare.db and seeds the Field A demo data
-streamlit run app.py       # opens the dashboard in your browser
+<a href="https://git.io/typing-svg">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=21&pause=1000&color=FACC15&center=true&vCenter=true&width=500&lines=CS+Student;Python" alt="Typing animation" />
+</a>
+
+<br/>
+
+<img src="https://komarev.com/ghpvc/?username=huracan07&style=for-the-badge&color=FACC15&label=PROFILE+VIEWS" alt="Profile views" />
+<img src="https://img.shields.io/github/followers/huracan07?style=for-the-badge&color=FACC15&labelColor=2E3440&label=FOLLOWERS" alt="GitHub followers" />
+
+</div>
+
+---
+
+## 👋 Who I Am
+
+```ts
+const profile = {
+  title: "CS Student",
+  techStack: {
+    languages: ["Python"],
+  },
+  contact: {
+    email: "suprajits4@gmail.com",
+    linkedin: "https://www.linkedin.com/in/huracan07",
+  },
+};
 ```
 
-The app runs immediately in **demo mode** even without a trained model —
-`model_inference.py` falls back to realistic simulated predictions so you
-can build and demo the rest of the app (tracking, trends, risk) before the
-classifier is trained. Train the real model whenever you're ready:
+## 🧰 Tech Stack
 
-```bash
-# get the PlantVillage dataset from Kaggle first — see model_train.py header
-python model_train.py
-# copy the resulting model/tomato_disease_model.h5 — app.py picks it up automatically
-```
+### Languages
 
-## Architecture
+<p>
+  <img src="https://skillicons.dev/icons?i=python&theme=light" alt="Python" />
+</p>
 
-```
-                 CropCare AI
-                     |
-        +------------+------------+
-        |                         |
-   Vision Model              Farm Database
-   (model_inference.py)      (database.py)
-        |                         |
- Disease + Severity        History + Trends
-   (severity.py)                  |
-        +------------+------------+
-                     |
-              Decision Engine
-              (risk_engine.py)
-                     |
-             Farmer Dashboard
-                  (app.py)
-```
+### Technology
 
-## What's built now (Phase 1 — this repo)
+| Layer | Technology |
+|---|---|
+| Language | Python |
 
-| Feature from the pitch | Status | File |
-|---|---|---|
-| Detect (crop + disease + confidence) | ✅ Working (demo mode until trained) | `model_inference.py` |
-| Measure (severity as % leaf area) | ✅ Working, tested against a synthetic image | `severity.py` |
-| Track (per-plant/field scan history, weekly trend) | ✅ Working | `database.py` |
-| Field-level risk decision | ✅ Working | `risk_engine.py` |
-| Farmer-specific longitudinal history | ✅ Working (it's what `database.py` stores) | `database.py` |
-| Dashboard tying it together | ✅ Working | `app.py` |
+## 📊 GitHub Stats
 
-## Roadmap (Phase 2 — pitch it, build it after the MVP works)
+<div align="center">
 
-These are real, buildable features — just bigger than a hackathon weekend,
-and worth being upfront about rather than claiming they're done:
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=huracan07&show_icons=true&hide_border=true&bg_color=2E3440&title_color=FACC15&text_color=ECEFF4&icon_color=FACC15&rank_icon=github" alt="GitHub stats" />
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=huracan07&layout=compact&hide_border=true&bg_color=2E3440&title_color=FACC15&text_color=ECEFF4" alt="Top languages" />
 
-- **Regional disease map.** Needs multi-user accounts and a shared backend
-  (not just one local SQLite file) so many farmers' scans can be aggregated
-  by district. Once `scans` live in a shared database, the query itself is
-  simple: group by district + week, compare against the prior week.
-- **True offline on-device inference.** `model_train.py` includes a
-  `convert_to_tflite()` step — MobileNetV2 was chosen specifically because
-  it converts cleanly to TensorFlow Lite for a phone app. What's not built
-  yet is the actual mobile app (Flutter/Kotlin) and the local-then-sync
-  logic; today's `app.py` is a server-side Streamlit dashboard, not an
-  on-device app.
-- **AI assistant layer.** The structured output (`disease`, `severity_pct`,
-  risk `level`, `reasons`) is already exactly the input an LLM call would
-  need to generate natural-language, farmer-friendly explanations — that's
-  a small addition (one function that formats a prompt from this data) once
-  the core pipeline above is solid.
+<br/>
 
-## How severity actually works
+<img src="https://streak-stats.demolab.com?user=huracan07&theme=nord&hide_border=true&background=2E3440&ring=FACC15&fire=FACC15&currStreakLabel=FACC15&sideLabels=ECEFF4&currStreakNum=ECEFF4&sideNums=ECEFF4&dates=9AA4B2" alt="GitHub streak stats" />
 
-`severity.py` uses HSV colour segmentation, not a trained model: it masks
-out "healthy green" and "diseased brown/dark" pixel ranges and divides one
-by the other. It's a real, standard plant-pathology image-processing
-technique — and it's honest to say the HSV thresholds are starting points,
-not calibrated against your specific dataset yet. If a judge asks about
-accuracy: tune the ranges in `severity.py` against a handful of your own
-sample photos before the demo, and mention that a photo taken against a
-plain background (not soil or a patterned surface) is what the current
-version assumes — background segmentation is a documented improvement, not
-a hidden flaw.
+</div>
 
-## Notes
+## 🏆 GitHub Trophies
 
-- Default crop scope is tomato (matches the pitch's leaf-spot example).
-  Extending to other crops means retraining `model_train.py` on more
-  PlantVillage folders and extending `CLASS_NAMES` in `model_inference.py`.
-- `database.seed_demo_data()` reproduces the exact "Field A" numbers from
-  the pitch (20 plants, 12 healthy / 6 Early Blight / 2 Septoria, weekly
-  average severity 4% → 9% → 14%) so the dashboard has something real to
-  show the moment you open it.
+<div align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=huracan07&theme=nord&no-frame=true&no-bg=true&margin-w=8&title=Commit,Repositories,Stars,Followers,PullRequest,Issues" alt="GitHub trophies" />
+</div>
+
+## 🤝 Connect With Me
+
+<div align="center">
+
+<a href="mailto:suprajits4@gmail.com">
+  <img src="https://img.shields.io/badge/Email-Contact%20Me-FACC15?style=for-the-badge&logo=gmail&logoColor=1F2937" alt="Email" />
+</a>
+<a href="https://www.linkedin.com/in/huracan07">
+  <img src="https://img.shields.io/badge/LinkedIn-Connect-FACC15?style=for-the-badge&logo=linkedin&logoColor=1F2937" alt="LinkedIn" />
+</a>
+
+</div>
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FEF08A,100:FACC15&height=110&section=footer" alt="Waving footer banner" width="100%" />
+
+</div>
